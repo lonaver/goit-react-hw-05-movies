@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { FetchMovies } from '../FetchMovies';
+import { FetchMovies } from '../../FetchMovies';
 
 const Reviews = () => {
   const [movieReveiws, setMovieReveiws] = useState([]);
@@ -11,10 +11,8 @@ const Reviews = () => {
     const ApiFetshListMovies = async () => {
       try {
         const OneMovie = await FetchMovies(`/movie/${movieId}/reviews`);
-        console.log('Credit', OneMovie);
         const dataResult = [...OneMovie.data.results];
         setMovieReveiws(dataResult);
-        console.log(dataResult);
       } catch (error) {
         console.log(error);
       }

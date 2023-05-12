@@ -1,6 +1,6 @@
 import { useEffect, useState, Suspense, useRef } from 'react';
 import { useParams, Outlet, Link, useLocation } from 'react-router-dom';
-import { FetchMovies } from '../FetchMovies';
+import { FetchMovies } from '../../FetchMovies';
 
 import {
   Container,

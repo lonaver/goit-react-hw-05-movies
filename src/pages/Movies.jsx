@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { FetchMovies } from '../FetchMovies';
 import { Link, useLocation } from 'react-router-dom';
 
-import { Wrapper, Input, BtnSearch } from '../components/Movies.styled';
+import { Wrapper, Input, BtnSearch } from './Movies.styled';
 
 const Movies = () => {
   const [arrayMoviesSearch, setArrayMoviesSearch] = useState([]);
@@ -12,8 +12,6 @@ const Movies = () => {
 
   useEffect(() => {
     const movieName = searchParams.get('query') ?? '';
-    console.log('inUseEffect', typeof movieName);
-
     if (movieName.trim() === '') return;
 
     const ApiFetshListMovies = async () => {

@@ -9,14 +9,11 @@ const Home = () => {
   useEffect(() => {
     const ApiFetshListMovies = async () => {
       try {
-        //setLoading(true);
         const listMovies = await FetchMovies('/trending/movie/day');
         const arrayMovies = [...listMovies.data.results];
         setArayMovies(arrayMovies);
       } catch (error) {
         console.log(error);
-      } finally {
-        // setLoading(false);
       }
     };
     ApiFetshListMovies();
@@ -39,4 +36,3 @@ const Home = () => {
 };
 
 export default Home;
-//

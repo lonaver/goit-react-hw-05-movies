@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { FetchMovies } from '../FetchMovies';
+import { FetchMovies } from '../../FetchMovies';
 
 const Cast = () => {
   const [movieCredits, setMovieCredits] = useState([]);
@@ -28,7 +28,7 @@ const Cast = () => {
         {movieCredits.map(({ credit_id, name, profile_path }) => {
           return (
             <li key={credit_id}>
-              <img src={profile_path} alt="photo actor"></img>
+              <img src={profile_path} alt="actor"></img>
               <p>{name}</p>
             </li>
           );

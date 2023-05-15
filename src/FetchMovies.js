@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const KEY_API = '228d8284295592923c769d834cdf0ca4';
 export const BASE_URL = `https://image.tmdb.org/t/p/w500`;
-//axios.defaults.baseURL('https://api.themoviedb.org/3/');
 
 export async function FetchMovies(request = 'movie/76341', searchStr = '') {
   const response = await axios.get(

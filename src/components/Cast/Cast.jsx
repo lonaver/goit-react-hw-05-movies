@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { FetchMovies } from '../../FetchMovies';
+import { FetchMovies, BASE_URL } from '../../FetchMovies';
+import { ThumbImg, WrapperCasts } from './Cast.styled';
 
 const Cast = () => {
   const [movieCredits, setMovieCredits] = useState([]);
@@ -11,10 +12,8 @@ const Cast = () => {
     const ApiFetshListMovies = async () => {
       try {
         const OneMovie = await FetchMovies(`/movie/${movieId}/credits`);
-        console.log('Credit', OneMovie);
         const dataCast = [...OneMovie.data.cast];
         setMovieCredits(dataCast);
-        console.log(dataCast);
       } catch (error) {
         console.log(error);
       }
@@ -24,16 +23,24 @@ const Cast = () => {
 
   return (
     <div>
-      <ul>
+      <WrapperCasts>
         {movieCredits.map(({ credit_id, name, profile_path }) => {
           return (
             <li key={credit_id}>
-              <img src={profile_path} alt="actor"></img>
+              {profile_path ? (
+                <ThumbImg>
+                  <img src={BASE_URL + profile_path} alt={name}></img>
+                </ThumbImg>
+              ) : (
+                <ThumbImg>
+                  <span>No image...</span>
+                </ThumbImg>
+              )}
               <p>{name}</p>
             </li>
           );
         })}
-      </ul>
+      </WrapperCasts>
     </div>
   );
 };

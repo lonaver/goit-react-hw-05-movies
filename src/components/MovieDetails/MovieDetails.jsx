@@ -1,12 +1,12 @@
 import { useEffect, useState, Suspense, useRef } from 'react';
 import { useParams, Outlet, Link, useLocation } from 'react-router-dom';
-import { FetchMovies } from '../../FetchMovies';
+import { FetchMovies, BASE_URL } from '../../FetchMovies';
 
 import {
   Container,
   WrapperMain,
   WrapperDetailsText,
-  ThumbImg,
+  Img,
   WrapperGenres,
   ListAdditional,
   StyledLink,
@@ -27,33 +27,29 @@ const MovieDetails = () => {
 
         const dataMovie = OneMovie.data;
         setMovieDetail(dataMovie);
-        console.log('One', dataMovie);
       } catch (error) {
         console.log(error);
       } finally {
-        //homepage   original_title backdrop_path
       }
     };
     ApiFetshListMovies();
   }, [movieId]);
-  // const KEY_API = '228d8284295592923c769d834cdf0ca4';
-  // const pathCard = `https://api.themoviedb.org/3?api_key=${KEY_API}/movie/${movieId}${movieDetails.poster_path}`;
-  // console.log('image', pathCard);
+
   return (
     <div>
       <StyledLink to={backLinkLocationRef.current}>Go back</StyledLink>
       <Container>
         <WrapperMain>
-          <ThumbImg>
-            <img
-              alt="movie"
-              src={movieDetails.poster_path}
-              width="160"
-              height="220"
-            ></img>
-          </ThumbImg>
+          <Img
+            alt="movie"
+            src={BASE_URL + movieDetails.poster_path}
+            width="160"
+            height="220"
+          ></Img>
           <WrapperDetailsText>
             <MainTitle>{movieDetails.title}</MainTitle>
+            <h2>User Score:</h2>
+            <p>{Number(movieDetails.vote_average) * 10}%</p>
             <p>{movieDetails.overview}</p>
             <div>
               <h2>Genres</h2>

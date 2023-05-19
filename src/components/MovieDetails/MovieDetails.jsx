@@ -1,5 +1,11 @@
 import { useEffect, useState, Suspense, useRef } from 'react';
-import { useParams, Outlet, Link, useLocation } from 'react-router-dom';
+import {
+  useParams,
+  Outlet,
+  Link,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import { FetchMovies, BASE_URL } from '../../FetchMovies';
 
 import {
@@ -15,6 +21,8 @@ import {
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetail] = useState([]);
+  const navigate = useNavigate();
+
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '';
   const backLinkLocationRef = useRef(backLinkHref);
@@ -29,11 +37,11 @@ const MovieDetails = () => {
         setMovieDetail(dataMovie);
       } catch (error) {
         console.log(error);
-      } finally {
+        navigate('*', { replace: true });
       }
     };
     ApiFetshListMovies();
-  }, [movieId]);
+  }, [movieId, navigate]);
 
   return (
     <div>

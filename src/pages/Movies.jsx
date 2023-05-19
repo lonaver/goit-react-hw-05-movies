@@ -8,10 +8,10 @@ import { Wrapper, Input, BtnSearch } from './Movies.styled';
 const Movies = () => {
   const [arrayMoviesSearch, setArrayMoviesSearch] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams({});
+  const movieName = searchParams.get('query') ?? '';
   const location = useLocation();
 
   useEffect(() => {
-    const movieName = searchParams.get('query') ?? '';
     if (movieName.trim() === '') return;
 
     const ApiFetshListMovies = async () => {
@@ -27,7 +27,7 @@ const Movies = () => {
       }
     };
     ApiFetshListMovies();
-  }, [searchParams]);
+  }, [searchParams, movieName]);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -35,6 +35,14 @@ const Movies = () => {
     const nextParams = query !== '' ? { query } : {};
     setSearchParams(nextParams);
     setArrayMoviesSearch([]);
+  };
+
+  const onChange = e => {
+    const query = e.target.value.trim();
+    if (query === '') {
+      const nextParams = {};
+      setSearchParams(nextParams);
+    }
   };
 
   return (
@@ -47,9 +55,11 @@ const Movies = () => {
 
           <Input
             type="text"
+            defaultValue={movieName}
             autoComplete="off"
             autoFocus
             placeholder="Search movies"
+            onChange={onChange}
             id="search"
           />
         </Wrapper>
